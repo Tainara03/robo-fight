@@ -191,11 +191,11 @@ export function getRotationMatrix(P1: number[], P2: number[], theta: number) {
   return matrix;
 }
 
-export function ortographicProjection(xw_min: number, xw_max: number, yw_min: number, yw_max: number, z_near: number, z_far: number) {
+export function getOrtographicProjection(xw_min: number, xw_max: number, yw_min: number, yw_max: number, z_near: number, z_far: number) {
   return [2 / (xw_max - xw_min), 0, 0, 0, 0, 2 / (yw_max - yw_min), 0, 0, 0, 0, -2 / (z_near - z_far), 0, -(xw_max + xw_min) / (xw_max - xw_min), -(yw_max + yw_min) / (yw_max - yw_min), (z_near + z_far) / (z_near - z_far), 1];
 }
 
-export function perspectiveProjection(xw_min: number, xw_max: number, yw_min: number, yw_max: number, z_near: number, z_far: number) {
+export function getPerspectiveProjection(xw_min: number, xw_max: number, yw_min: number, yw_max: number, z_near: number, z_far: number) {
   return [-(2 * z_near) / (xw_max - xw_min), 0, 0, 0, 0, -(2 * z_near) / (yw_max - yw_min), 0, 0, (xw_max + xw_min) / (xw_max - xw_min), (yw_max + yw_min) / (yw_max - yw_min), (z_near + z_far) / (z_near - z_far), -1, 0, 0, -1, 0];
 }
 

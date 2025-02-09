@@ -1,4 +1,9 @@
-const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+export const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
+const canvasSize = Math.min(window.innerWidth, window.innerHeight);
+
+canvas.width = canvasSize;
+canvas.height = canvasSize;
 
 export const gl = canvas.getContext("webgl", { preserveDrawingBuffer: true })!;
 
@@ -15,9 +20,7 @@ export function createShader(type: GLenum, source: string) {
   const success = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
 
   if (success) return shader;
-
-  console.log(gl.getShaderInfoLog(shader));
-  gl.deleteShader(shader);
+  else throw new Error("Shader not created");
 }
 
 export function createProgram(vertex: WebGLShader, fragment: WebGLShader) {
@@ -29,8 +32,7 @@ export function createProgram(vertex: WebGLShader, fragment: WebGLShader) {
 
   const success = gl.getProgramParameter(program, gl.LINK_STATUS);
 
-  if (success) return program;
+  if (!success) throw new Error("Program not created");
 
-  console.log(gl.getProgramInfoLog(program));
-  gl.deleteProgram(program);
+  return program;
 }
